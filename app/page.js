@@ -66,57 +66,58 @@ export default function Home() {
         {/* Заголовок */}
         <div className="text-center mb-16">
           <div className="mb-4">
-  <img 
-    src="/logo.png" 
-    alt="Логотип" 
-    className="h-44 mx-auto"
-  />
-</div>
+            <img 
+              src="/logo.png" 
+              alt="Логотип" 
+              className="h-44 mx-auto"
+            />
+          </div>
           <p className="text-gray-500 text-lg font-light">
             твой стилист прямо в кармане 
           </p>
         </div>
+
         {/* Баннер с ценами */}
-<div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 mb-12">
-  <div className="text-center mb-4">
-    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Тарифы</span>
-  </div>
-  <div className="flex flex-col md:flex-row gap-4 justify-center">
-    {/* Бесплатный тариф */}
-    <div className="flex-1 bg-white rounded-xl p-5 border border-gray-100">
-      <h3 className="font-medium text-gray-900 mb-1">Free</h3>
-      <p className="text-3xl font-light text-gray-900 mb-3">0 ₽<span className="text-sm text-gray-400 font-normal">/мес</span></p>
-      <ul className="text-sm text-gray-500 space-y-1">
-        <li>✓ До 5 вещей в гардеробе</li>
-        <li>✓ Базовые образы</li>
-      </ul>
-    </div>
-    {/* Pro тариф */}
-    <div className="flex-1 bg-gray-900 rounded-xl p-5 border border-gray-800">
-      <h3 className="font-medium text-white mb-1">Pro</h3>
-      <p className="text-3xl font-light text-white mb-3">399 ₽<span className="text-sm text-gray-400 font-normal">/мес</span></p>
-      <ul className="text-sm text-gray-300 space-y-1">
-        <li>✓ Безлимит вещей</li>
-        <li>✓ AI стилист 24/7</li>
-        <li>✓ Образа на любой случай</li>
-        <li>✓ Рекомендации покупок</li>
-      </ul>
-    </div>
-    {/* Premium тариф */}
-    <div className="flex-1 bg-white rounded-xl p-5 border border-gray-100">
-      <h3 className="font-medium text-gray-900 mb-1">Premium</h3>
-      <p className="text-3xl font-light text-gray-900 mb-3">799 ₽<span className="text-sm text-gray-400 font-normal">/мес</span></p>
-      <ul className="text-sm text-gray-500 space-y-1">
-        <li>✓ Всё из Pro</li>
-        <li>✓ Виртуальная примерка</li>
-        <li>✓ Персональный стилист</li>
-      </ul>
-    </div>
-  </div>
-  <p className="text-center text-xs text-gray-400 mt-4">
-    Бесплатно 14 дней. Отмена в любой момент.
-  </p>
-</div>
+        <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 mb-12">
+          <div className="text-center mb-4">
+            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Тарифы</span>
+          </div>
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            {/* Бесплатный тариф */}
+            <div className="flex-1 bg-white rounded-xl p-5 border border-gray-100">
+              <h3 className="font-medium text-gray-900 mb-1">Free</h3>
+              <p className="text-3xl font-light text-gray-900 mb-3">0 ₽<span className="text-sm text-gray-400 font-normal">/мес</span></p>
+              <ul className="text-sm text-gray-500 space-y-1">
+                <li>✓ До 5 вещей в гардеробе</li>
+                <li>✓ Базовые образы</li>
+              </ul>
+            </div>
+            {/* Pro тариф */}
+            <div className="flex-1 bg-gray-900 rounded-xl p-5 border border-gray-800">
+              <h3 className="font-medium text-white mb-1">Pro</h3>
+              <p className="text-3xl font-light text-white mb-3">399 ₽<span className="text-sm text-gray-400 font-normal">/мес</span></p>
+              <ul className="text-sm text-gray-300 space-y-1">
+                <li>✓ Безлимит вещей</li>
+                <li>✓ AI стилист 24/7</li>
+                <li>✓ Образа на любой случай</li>
+                <li>✓ Рекомендации покупок</li>
+              </ul>
+            </div>
+            {/* Premium тариф */}
+            <div className="flex-1 bg-white rounded-xl p-5 border border-gray-100">
+              <h3 className="font-medium text-gray-900 mb-1">Premium</h3>
+              <p className="text-3xl font-light text-gray-900 mb-3">799 ₽<span className="text-sm text-gray-400 font-normal">/мес</span></p>
+              <ul className="text-sm text-gray-500 space-y-1">
+                <li>✓ Всё из Pro</li>
+                <li>✓ Виртуальная примерка</li>
+                <li>✓ Персональный стилист</li>
+              </ul>
+            </div>
+          </div>
+          <p className="text-center text-xs text-gray-400 mt-4">
+            Бесплатно 14 дней. Отмена в любой момент.
+          </p>
+        </div>
 
         {/* Загрузка */}
         <div className="mb-12">
