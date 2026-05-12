@@ -208,9 +208,9 @@ export default function Home() {
                 id="file-input"
               />
               <label htmlFor="file-input" className="cursor-pointer">
-                <span className="text-4xl block mb-3">📸</span>
+                <span className="text-4xl block mb-3"></span>
                 <span className="text-gray-600 font-medium">
-                  {images.length >= 5 ? "Максимум 5 вещей" : "Добавить одежду"}
+                  {images.length >= 5 ? "максимум 5 вещей" : "добавить одежду"}
                 </span>
                 <p className="text-gray-400 text-sm mt-2">
                   {images.length}/5 вещей в гардеробе
@@ -240,14 +240,14 @@ export default function Home() {
             disabled={loading || images.length === 0}
             className="px-10 py-3 bg-gray-900 text-white rounded-full font-medium text-sm tracking-wide hover:bg-gray-800 transition-colors disabled:opacity-40"
           >
-            {loading ? "Создаю образ..." : "Собрать образ"}
+            {loading ? "создаю образ..." : "собрать образ"}
           </button>
         </div>
 
         {/* Результат */}
         {outfits && (
           <div className="border-t border-gray-100 pt-12">
-            <h2 className="text-xl font-light text-gray-900 mb-6 tracking-tight">Твой образ</h2>
+            <h2 className="text-xl font-light text-gray-900 mb-6 tracking-tight">твой образ</h2>
             <div className="bg-gray-50 rounded-2xl p-8">
               <pre className="whitespace-pre-wrap font-sans text-gray-700 text-sm leading-relaxed">
                 {outfits}
