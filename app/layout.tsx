@@ -1,3 +1,4 @@
+import React from "react";
 // app/layout.js
 import "./globals.css";
 import { Inter } from "next/font/google"; // Импортируем шрифт Inter из Google Fonts
@@ -14,7 +15,7 @@ export const metadata = {
   description: "Your personal AI stylist",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       {/*
