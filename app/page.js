@@ -6,6 +6,11 @@ export default function Home() {
   const [imagePreviews, setImagePreviews] = useState([]);
   const [outfits, setOutfits] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  // НОВЫЕ СОСТОЯНИЯ ДЛЯ СТИЛЯ И ПОГОДЫ
+  const [selectedStyle, setSelectedStyle] = useState("casual");
+  const [selectedWeather, setSelectedWeather] = useState("sunny");
+  const [selectedEvent, setSelectedEvent] = useState("daily");
 
   // Добавление новых фото (по одному)
   const handleAddPhotos = (e) => {
@@ -13,15 +18,13 @@ export default function Home() {
     const totalFiles = images.length + newFiles.length;
     
     if (totalFiles > 5) {
-      alert(`можно загрузить только 5 фото. сейчас у тебя ${images.length} фото, можно добавить ещё ${5 - images.length}.`);
+      alert(`Можно загрузить только 5 фото. Сейчас у тебя ${images.length} фото, можно добавить ещё ${5 - images.length}.`);
       return;
     }
     
     setImages([...images, ...newFiles]);
     const newPreviews = newFiles.map(file => URL.createObjectURL(file));
     setImagePreviews([...imagePreviews, ...newPreviews]);
-    
-    // Очищаем input, чтобы можно было добавлять снова
     e.target.value = "";
   };
 
@@ -29,14 +32,13 @@ export default function Home() {
   const removePhoto = (index) => {
     const newImages = images.filter((_, i) => i !== index);
     const newPreviews = imagePreviews.filter((_, i) => i !== index);
-    
     setImages(newImages);
     setImagePreviews(newPreviews);
   };
 
   const generateOutfit = async () => {
     if (images.length === 0) {
-      alert("сначала добавь фото одежды");
+      alert("Сначала добавь фото одежды");
       return;
     }
 
@@ -48,13 +50,16 @@ export default function Home() {
         method: "POST",
         body: JSON.stringify({
           items: images.map((f) => f.name),
+          style: selectedStyle,
+          weather: selectedWeather,
+          event: selectedEvent,
         }),
       });
 
       const data = await res.json();
       setOutfits(data.result);
     } catch (error) {
-      setOutfits("❌ ошибка: не удалось создать образ. попробуй ещё раз.");
+      setOutfits("❌ Ошибка: не удалось создать образ. Попробуй ещё раз.");
     } finally {
       setLoading(false);
     }
@@ -70,11 +75,87 @@ export default function Home() {
               src="/logo.png" 
               alt="Логотип" 
               className="h-44 mx-auto"
+              onError={(e) => e.currentTarget.style.display = 'none'}
             />
           </div>
           <p className="text-gray-500 text-lg font-light">
-            твой стилист прямо в кармане 
+            твой стилист прямо в кармане
           </p>
+        </div>
+
+        {/* НОВЫЙ БЛОК: ВЫБОР СТИЛЯ И ПОГОДЫ */}
+        <div className="bg-gray-50 rounded-2xl p-6 mb-8">
+          <h3 className="text-sm font-medium text-gray-700 mb-4 text-center">Настрой стиль</h3>
+          
+          {/* Кнопки стилей */}
+          <div className="flex flex-wrap gap-2 justify-center mb-6">
+            {[
+              { id: "casual", name: "👕 Casual", emoji: "👕" },
+              { id: "streetwear", name: "🧥 Streetwear", emoji: "🧥" },
+              { id: "minimal", name: "⚪ Минимализм", emoji: "⚪" },
+              { id: "oldmoney", name: "🕰️ Old Money", emoji: "🕰️" },
+              { id: "office", name: "💼 Офис", emoji: "💼" },
+              { id: "evening", name: "✨ Вечерний", emoji: "✨" }
+            ].map((style) => (
+              <button
+                key={style.id}
+                onClick={() => setSelectedStyle(style.id)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  selectedStyle === style.id
+                    ? "bg-gray-900 text-white shadow-md"
+                    : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
+                }`}
+              >
+                {style.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Кнопки погоды */}
+          <div className="flex flex-wrap gap-2 justify-center mb-6">
+            <h4 className="w-full text-xs text-gray-500 text-center mb-2">Погода</h4>
+            {[
+              { id: "sunny", name: "☀️ Солнечно" },
+              { id: "cloudy", name: "☁️ Облачно" },
+              { id: "rainy", name: "🌧️ Дождливо" },
+              { id: "cold", name: "❄️ Холодно" }
+            ].map((weather) => (
+              <button
+                key={weather.id}
+                onClick={() => setSelectedWeather(weather.id)}
+                className={`px-3 py-1.5 rounded-full text-xs transition-all ${
+                  selectedWeather === weather.id
+                    ? "bg-gray-800 text-white"
+                    : "bg-white text-gray-600 border border-gray-200"
+                }`}
+              >
+                {weather.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Кнопки события */}
+          <div className="flex flex-wrap gap-2 justify-center">
+            <h4 className="w-full text-xs text-gray-500 text-center mb-2">Событие</h4>
+            {[
+              { id: "daily", name: "📱 Повседневность" },
+              { id: "date", name: "❤️ Свидание" },
+              { id: "party", name: "🎉 Вечеринка" },
+              { id: "travel", name: "✈️ Путешествие" }
+            ].map((event) => (
+              <button
+                key={event.id}
+                onClick={() => setSelectedEvent(event.id)}
+                className={`px-3 py-1.5 rounded-full text-xs transition-all ${
+                  selectedEvent === event.id
+                    ? "bg-gray-800 text-white"
+                    : "bg-white text-gray-600 border border-gray-200"
+                }`}
+              >
+                {event.name}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Баннер с ценами */}
@@ -83,30 +164,27 @@ export default function Home() {
             <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Тарифы</span>
           </div>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            {/* Бесплатный тариф */}
             <div className="flex-1 bg-white rounded-xl p-5 border border-gray-100">
               <h3 className="font-medium text-gray-900 mb-1">Free</h3>
-              <p className="text-3xl font-light text-gray-900 mb-3">0 ₽<span className="text-sm text-gray-400 font-normal">/мес</span></p>
+              <p className="text-3xl font-light text-gray-900 mb-3">0 ₽<span className="text-sm text-gray-400">/мес</span></p>
               <ul className="text-sm text-gray-500 space-y-1">
-                <li>✓ До 5 вещей в гардеробе</li>
-                <li>✓ Базовые образы</li>
+                <li>✓ До 5 вещей</li>
+                <li>✓ Базовые стили</li>
               </ul>
             </div>
-            {/* Pro тариф */}
-            <div className="flex-1 bg-gray-900 rounded-xl p-5 border border-gray-800">
+            <div className="flex-1 bg-gray-900 rounded-xl p-5 relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-0.5 rounded-full border border-gray-700">🔥 Популярный</div>
               <h3 className="font-medium text-white mb-1">Pro</h3>
-              <p className="text-3xl font-light text-white mb-3">399 ₽<span className="text-sm text-gray-400 font-normal">/мес</span></p>
+              <p className="text-3xl font-light text-white mb-3">399 ₽<span className="text-sm text-gray-400">/мес</span></p>
               <ul className="text-sm text-gray-300 space-y-1">
-                <li>✓ Безлимит вещей</li>
+                <li>✓ Все стили</li>
                 <li>✓ AI стилист 24/7</li>
-                <li>✓ Образа на любой случай</li>
                 <li>✓ Рекомендации покупок</li>
               </ul>
             </div>
-            {/* Premium тариф */}
             <div className="flex-1 bg-white rounded-xl p-5 border border-gray-100">
               <h3 className="font-medium text-gray-900 mb-1">Premium</h3>
-              <p className="text-3xl font-light text-gray-900 mb-3">799 ₽<span className="text-sm text-gray-400 font-normal">/мес</span></p>
+              <p className="text-3xl font-light text-gray-900 mb-3">799 ₽<span className="text-sm text-gray-400">/мес</span></p>
               <ul className="text-sm text-gray-500 space-y-1">
                 <li>✓ Всё из Pro</li>
                 <li>✓ Виртуальная примерка</li>
@@ -114,12 +192,9 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <p className="text-center text-xs text-gray-400 mt-4">
-            Бесплатно 14 дней. Отмена в любой момент.
-          </p>
         </div>
 
-        {/* Загрузка */}
+        {/* Загрузка фото (остаётся без изменений) */}
         <div className="mb-12">
           <label className="block mb-6">
             <div className="border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center hover:border-gray-300 transition-colors cursor-pointer">
@@ -133,9 +208,9 @@ export default function Home() {
                 id="file-input"
               />
               <label htmlFor="file-input" className="cursor-pointer">
-                <span className="text-4xl block mb-3"></span>
+                <span className="text-4xl block mb-3">📸</span>
                 <span className="text-gray-600 font-medium">
-                  {images.length >= 5 ? "максимум 5 вещей" : "добавить одежду"}
+                  {images.length >= 5 ? "Максимум 5 вещей" : "Добавить одежду"}
                 </span>
                 <p className="text-gray-400 text-sm mt-2">
                   {images.length}/5 вещей в гардеробе
@@ -144,23 +219,13 @@ export default function Home() {
             </div>
           </label>
 
-          {/* Превью фоток */}
           {imagePreviews.length > 0 && (
             <div className="mt-8">
               <div className="flex flex-wrap gap-4">
                 {imagePreviews.map((preview, i) => (
                   <div key={i} className="relative group">
-                    <img 
-                      src={preview} 
-                      alt={`Одежда ${i+1}`} 
-                      className="w-24 h-24 object-cover rounded-lg border border-gray-100 shadow-sm" 
-                    />
-                    <button
-                      onClick={() => removePhoto(i)}
-                      className="absolute -top-2 -right-2 bg-gray-100 text-gray-500 rounded-full w-6 h-6 text-xs hover:bg-gray-200 hover:text-gray-700 transition-colors"
-                    >
-                      ✕
-                    </button>
+                    <img src={preview} alt={`Одежда ${i+1}`} className="w-24 h-24 object-cover rounded-lg border border-gray-100 shadow-sm" />
+                    <button onClick={() => removePhoto(i)} className="absolute -top-2 -right-2 bg-gray-100 text-gray-500 rounded-full w-6 h-6 text-xs hover:bg-gray-200">✕</button>
                   </div>
                 ))}
               </div>
@@ -168,23 +233,21 @@ export default function Home() {
           )}
         </div>
 
-        {/* Кнопка */}
+        {/* Кнопка генерации */}
         <div className="text-center mb-16">
           <button
             onClick={generateOutfit}
             disabled={loading || images.length === 0}
-            className="px-10 py-3 bg-gray-900 text-white rounded-full font-medium text-sm tracking-wide hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-10 py-3 bg-gray-900 text-white rounded-full font-medium text-sm tracking-wide hover:bg-gray-800 transition-colors disabled:opacity-40"
           >
-            {loading ? "Creating look..." : "Generate outfit"}
+            {loading ? "Создаю образ..." : "Собрать образ"}
           </button>
         </div>
 
         {/* Результат */}
         {outfits && (
           <div className="border-t border-gray-100 pt-12">
-            <h2 className="text-xl font-light text-gray-900 mb-6 tracking-tight">
-              Your look
-            </h2>
+            <h2 className="text-xl font-light text-gray-900 mb-6 tracking-tight">Твой образ</h2>
             <div className="bg-gray-50 rounded-2xl p-8">
               <pre className="whitespace-pre-wrap font-sans text-gray-700 text-sm leading-relaxed">
                 {outfits}

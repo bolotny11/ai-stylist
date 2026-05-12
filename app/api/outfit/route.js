@@ -7,47 +7,70 @@ const openai = new OpenAI({
 
 export async function POST(request) {
   try {
-    const { items } = await request.json();
+    const { items, style, weather, event } = await request.json();
 
-    if (!items || items.length === 0) {
-      return NextResponse.json({ error: "Нет вещей" }, { status: 400 });
-    }
+    // Перевод стилей на русский для AI
+    const styleNames = {
+      casual: "повседневный (casual)",
+      streetwear: "уличный (streetwear), свободный, смелый",
+      minimal: "минимализм, чистые линии, спокойные цвета",
+      oldmoney: "Old Money — элегантный, дорогой, сдержанный",
+      office: "офисный (business casual), строгий но современный",
+      evening: "вечерний выход, элегантный, стильный"
+    };
 
-    // Теперь AI реально анализирует вещи
-    const prompt = `Ты профессиональный стилист.
+    // Перевод погоды
+    const weatherDesc = {
+      sunny: "солнечно, тепло, можно лёгкую одежду",
+      cloudy: "облачно, без осадков",
+      rainy: "дождливо, нужен зонт и непромокаемая обувь",
+      cold: "холодно, нужно одеваться тепло"
+    };
 
-Проанализируй эти вещи из гардероба пользователя:
+    const prompt = `
+Ты элитный стилист, который работает с модными блогерами и звёздами.
+
+Гардероб пользователя:
 ${items.map((item, i) => `${i+1}. ${item}`).join("\n")}
 
-Опиши каждую вещь (категория, цвет, стиль), а потом составь 3 готовых образа.
+Параметры:
+- Стиль: ${styleNames[style] || style}
+- Погода: ${weatherDesc[weather] || weather}
+- Событие: ${event === "daily" ? "обычный день" : event === "date" ? "романтическое свидание" : event === "party" ? "вечеринка с друзьями" : "путешествие"}
+
+Твоя задача:
+Сгенерируй 3 разных образа, которые строго соответствуют стилю "${styleNames[style]}".
+
+Для каждого образа:
+1. Название образа (креативное, запоминающееся)
+2. Список вещей из гардероба пользователя (комбинируй существующие вещи)
+3. Почему это сочетание работает (цвет, силуэт, стиль)
+4. Совет по аксессуарам или обуви (если нет в гардеробе)
 
 Формат ответа:
 
-📋 АНАЛИЗ ГАРДЕРОБА:
-- [вещь 1]: [категория], [цвет], [стиль]
-- [вещь 2]: [категория], [цвет], [стиль]
+🔥 ОБРАЗ 1: [Название]
+👕 Вещи: ...
+💡 Почему круто: ...
+✨ Аксессуары: ...
 
-🔥 ОБРАЗ 1 (casual):
-- [вещь]
-- [вещь]
+🔥 ОБРАЗ 2: ...
+...
 
-🔥 ОБРАЗ 2 (офис/умный casual):
-- [вещь]
-- [вещь]
-
-🔥 ОБРАЗ 3 (вечер/свидание):
-- [вещь]
-- [вещь]`;
+Будь конкретным, вдохновляющим и пиши на русском.
+`;
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [{ role: "user", content: prompt }],
-      temperature: 0.9,
+      temperature: 0.85,
     });
 
     return NextResponse.json({ result: response.choices[0].message.content });
   } catch (error) {
-    console.error("Ошибка:", error);
-    return NextResponse.json({ error: "Ошибка AI: " + error.message }, { status: 500 });
+    console.error("AI Error:", error);
+    return NextResponse.json({ 
+      error: "Ошибка AI: " + error.message 
+    }, { status: 500 });
   }
 }
