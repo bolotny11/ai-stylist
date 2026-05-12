@@ -18,7 +18,7 @@ export default function Home() {
     const totalFiles = images.length + newFiles.length;
     
     if (totalFiles > 5) {
-      alert(`Можно загрузить только 5 фото. Сейчас у тебя ${images.length} фото, можно добавить ещё ${5 - images.length}.`);
+      alert(`можно загрузить только 5 фото. Сейчас у тебя ${images.length} фото, можно добавить ещё ${5 - images.length}.`);
       return;
     }
     
@@ -59,7 +59,7 @@ export default function Home() {
       const data = await res.json();
       setOutfits(data.result);
     } catch (error) {
-      setOutfits("❌ Ошибка: не удалось создать образ. Попробуй ещё раз.");
+      setOutfits("ошибка: не удалось создать образ. попробуй ещё раз.");
     } finally {
       setLoading(false);
     }
@@ -90,12 +90,12 @@ export default function Home() {
           {/* Кнопки стилей */}
           <div className="flex flex-wrap gap-2 justify-center mb-6">
             {[
-              { id: "casual", name: "👕 Casual", emoji: "👕" },
-              { id: "streetwear", name: "🧥 Streetwear", emoji: "🧥" },
-              { id: "minimal", name: "⚪ Минимализм", emoji: "⚪" },
-              { id: "oldmoney", name: "🕰️ Old Money", emoji: "🕰️" },
-              { id: "office", name: "💼 Офис", emoji: "💼" },
-              { id: "evening", name: "✨ Вечерний", emoji: "✨" }
+              { id: "casual", name: "casual", emoji: "👕" },
+              { id: "streetwear", name: "streetwear", emoji: "🧥" },
+              { id: "minimal", name: "минимализм", emoji: "⚪" },
+              { id: "oldmoney", name: "old money", emoji: "🕰️" },
+              { id: "office", name: "офис", emoji: "💼" },
+              { id: "evening", name: "вечерний", emoji: "✨" }
             ].map((style) => (
               <button
                 key={style.id}
@@ -115,10 +115,10 @@ export default function Home() {
           <div className="flex flex-wrap gap-2 justify-center mb-6">
             <h4 className="w-full text-xs text-gray-500 text-center mb-2">Погода</h4>
             {[
-              { id: "sunny", name: "☀️ Солнечно" },
-              { id: "cloudy", name: "☁️ Облачно" },
-              { id: "rainy", name: "🌧️ Дождливо" },
-              { id: "cold", name: "❄️ Холодно" }
+              { id: "sunny", name: "солнечно" },
+              { id: "cloudy", name: "облачно" },
+              { id: "rainy", name: "дождливо" },
+              { id: "cold", name: "холодно" }
             ].map((weather) => (
               <button
                 key={weather.id}
@@ -138,10 +138,10 @@ export default function Home() {
           <div className="flex flex-wrap gap-2 justify-center">
             <h4 className="w-full text-xs text-gray-500 text-center mb-2">Событие</h4>
             {[
-              { id: "daily", name: "📱 Повседневность" },
-              { id: "date", name: "❤️ Свидание" },
-              { id: "party", name: "🎉 Вечеринка" },
-              { id: "travel", name: "✈️ Путешествие" }
+              { id: "daily", name: "повседневность" },
+              { id: "date", name: "свидание" },
+              { id: "party", name: "вечеринка" },
+              { id: "travel", name: "путешествие" }
             ].map((event) => (
               <button
                 key={event.id}
@@ -173,7 +173,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="flex-1 bg-gray-900 rounded-xl p-5 relative">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-0.5 rounded-full border border-gray-700">🔥 Популярный</div>
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-0.5 rounded-full border border-gray-700">популярный</div>
               <h3 className="font-medium text-white mb-1">Pro</h3>
               <p className="text-3xl font-light text-white mb-3">399 ₽<span className="text-sm text-gray-400">/мес</span></p>
               <ul className="text-sm text-gray-300 space-y-1">
