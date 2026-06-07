@@ -10,7 +10,7 @@ export default function Home() {
   const [weatherLoading, setWeatherLoading] = useState(true);
   
   const [selectedStyle, setSelectedStyle] = useState("casual");
-  const [selectedWeather, setSelectedWeather] = useState("sunny");
+  const [selectedWeather, setSelectedWeather] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState("daily");
 
   // Загружаем реальную погоду
@@ -129,8 +129,22 @@ export default function Home() {
             ))}
           </div>
 
+          {/* Кнопки погоды */}
           <div className="flex flex-wrap gap-2 justify-center mb-6">
             <h4 className="w-full text-xs text-gray-500 text-center mb-2">Погода</h4>
+            
+            {/* 👇 ЭТО НОВАЯ КНОПКА "АВТО" 👇 */}
+            <button
+              onClick={() => setSelectedWeather(null)}
+              className={`px-3 py-1.5 rounded-full text-xs transition-all ${
+                selectedWeather === null
+                  ? "bg-gray-800 text-white"
+                  : "bg-white text-gray-600 border border-gray-200"
+              }`}
+            >
+              🤖 Авто
+            </button>
+            
             {[
               { id: "sunny", name: "солнечно" },
               { id: "cloudy", name: "облачно" },
