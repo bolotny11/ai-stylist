@@ -2,11 +2,18 @@
 import { useState, useEffect } from "react";
 
 export default function Home() {
-  // ... все твои состояния остаются ...
+  const [images, setImages] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [outfits, setOutfits] = useState("");
+  const [loading, setLoading] = useState(false);
   const [realWeather, setRealWeather] = useState(null);
   const [weatherLoading, setWeatherLoading] = useState(true);
+  
+  const [selectedStyle, setSelectedStyle] = useState("casual");
+  const [selectedWeather, setSelectedWeather] = useState("sunny");
+  const [selectedEvent, setSelectedEvent] = useState("daily");
 
-  // ЗАГРУЖАЕМ РЕАЛЬНУЮ ПОГОДУ ПРИ СТАРТЕ
+  // Загружаем реальную погоду
   useEffect(() => {
     async function fetchWeather() {
       try {
@@ -22,18 +29,6 @@ export default function Home() {
     fetchWeather();
   }, []);
 
-export default function Home() {
-  const [images, setImages] = useState([]);
-  const [imagePreviews, setImagePreviews] = useState([]);
-  const [outfits, setOutfits] = useState("");
-  const [loading, setLoading] = useState(false);
-  
-  // НОВЫЕ СОСТОЯНИЯ ДЛЯ СТИЛЯ И ПОГОДЫ
-  const [selectedStyle, setSelectedStyle] = useState("casual");
-  const [selectedWeather, setSelectedWeather] = useState("sunny");
-  const [selectedEvent, setSelectedEvent] = useState("daily");
-
-  // Добавление новых фото (по одному)
   const handleAddPhotos = (e) => {
     const newFiles = Array.from(e.target.files);
     const totalFiles = images.length + newFiles.length;
@@ -49,7 +44,6 @@ export default function Home() {
     e.target.value = "";
   };
 
-  // Удаление фото
   const removePhoto = (index) => {
     const newImages = images.filter((_, i) => i !== index);
     const newPreviews = imagePreviews.filter((_, i) => i !== index);
@@ -89,7 +83,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <div className="max-w-3xl mx-auto px-6 py-16">
-        {/* Заголовок */}
         <div className="text-center mb-16">
           <div className="mb-4">
             <img 
@@ -104,11 +97,15 @@ export default function Home() {
           </p>
         </div>
 
-        {/* НОВЫЙ БЛОК: ВЫБОР СТИЛЯ И ПОГОДЫ */}
+        {realWeather && realWeather.city && (
+          <div className="text-center mb-6 text-sm text-gray-500 bg-gray-50 py-2 rounded-full">
+            🌍 {realWeather.city} • {realWeather.description} • {realWeather.temp}°C
+          </div>
+        )}
+
         <div className="bg-gray-50 rounded-2xl p-6 mb-8">
           <h3 className="text-sm font-medium text-gray-700 mb-4 text-center">Настрой стиль</h3>
           
-          {/* Кнопки стилей */}
           <div className="flex flex-wrap gap-2 justify-center mb-6">
             {[
               { id: "casual", name: "casual", emoji: "👕" },
@@ -132,7 +129,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Кнопки погоды */}
           <div className="flex flex-wrap gap-2 justify-center mb-6">
             <h4 className="w-full text-xs text-gray-500 text-center mb-2">Погода</h4>
             {[
@@ -155,7 +151,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Кнопки события */}
           <div className="flex flex-wrap gap-2 justify-center">
             <h4 className="w-full text-xs text-gray-500 text-center mb-2">Событие</h4>
             {[
@@ -179,7 +174,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Баннер с ценами */}
         <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 mb-12">
           <div className="text-center mb-4">
             <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Тарифы</span>
@@ -215,7 +209,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Загрузка фото (остаётся без изменений) */}
         <div className="mb-12">
           <label className="block mb-6">
             <div className="border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center hover:border-gray-300 transition-colors cursor-pointer">
@@ -254,7 +247,6 @@ export default function Home() {
           )}
         </div>
 
-        {/* Кнопка генерации */}
         <div className="text-center mb-16">
           <button
             onClick={generateOutfit}
@@ -265,7 +257,6 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Результат */}
         {outfits && (
           <div className="border-t border-gray-100 pt-12">
             <h2 className="text-xl font-light text-gray-900 mb-6 tracking-tight">твой образ</h2>
