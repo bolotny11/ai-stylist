@@ -53,7 +53,7 @@ export default function Home() {
 
   const generateOutfit = async () => {
     if (images.length === 0) {
-      alert("Сначала добавь фото одежды");
+      alert("сначала добавь фото одежды");
       return;
     }
 
@@ -118,7 +118,7 @@ export default function Home() {
               <button
                 key={style.id}
                 onClick={() => setSelectedStyle(style.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                   selectedStyle === style.id
                     ? "bg-gray-900 text-white shadow-md"
                     : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
@@ -142,7 +142,7 @@ export default function Home() {
                   : "bg-white text-gray-600 border border-gray-200"
               }`}
             >
-              🤖 Авто
+              авто
             </button>
             
             {[
