@@ -1,5 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+export default function Home() {
+  // ... все твои состояния остаются ...
+  const [realWeather, setRealWeather] = useState(null);
+  const [weatherLoading, setWeatherLoading] = useState(true);
+
+  // ЗАГРУЖАЕМ РЕАЛЬНУЮ ПОГОДУ ПРИ СТАРТЕ
+  useEffect(() => {
+    async function fetchWeather() {
+      try {
+        const res = await fetch("/api/weather");
+        const data = await res.json();
+        setRealWeather(data);
+      } catch (err) {
+        console.error("Weather fetch error:", err);
+      } finally {
+        setWeatherLoading(false);
+      }
+    }
+    fetchWeather();
+  }, []);
 
 export default function Home() {
   const [images, setImages] = useState([]);
