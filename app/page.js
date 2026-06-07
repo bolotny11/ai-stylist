@@ -122,7 +122,7 @@ export default function Home() {
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                   selectedStyle === style.id
                     ? "bg-gray-800 text-white dark:bg-white dark:text-gray-900 shadow-md"
-                    : "bg-white text-gray-600 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                    : "bg-white text-gray-600 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700"
                 }`}
               >
                 {style.name}
