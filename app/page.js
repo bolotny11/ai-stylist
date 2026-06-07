@@ -120,8 +120,8 @@ export default function Home() {
                 onClick={() => setSelectedStyle(style.id)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                   selectedStyle === style.id
-                    ? "bg-gray-900 text-white shadow-md"
-                    : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
+                    ? "bg-gray-800 text-white shadow-md"
+                    : "bg-white text-gray-600 border border-gray-200 hover:border-gray-300"
                 }`}
               >
                 {style.name}
