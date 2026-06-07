@@ -10,60 +10,125 @@
 }
 
 .dark body {
-  background-color: #111827;
+  background-color: #0f172a !important;
 }
 
 .dark .bg-white {
-  background-color: #1f2937 !important;
+  background-color: #1e293b !important;
 }
 
 .dark .bg-gray-50 {
-  background-color: #1f2937 !important;
+  background-color: #0f172a !important;
 }
 
 .dark .bg-gray-100 {
-  background-color: #374151 !important;
+  background-color: #1e293b !important;
 }
 
-.dark .bg-gray-900 {
-  background-color: #f3f4f6 !important;
+.dark .bg-gray-200 {
+  background-color: #334155 !important;
 }
 
 .dark .text-gray-500,
 .dark .text-gray-600,
 .dark .text-gray-700,
 .dark .text-gray-400 {
-  color: #9ca3af !important;
+  color: #94a3b8 !important;
 }
 
 .dark .text-gray-900 {
-  color: #f3f4f6 !important;
-}
-
-.dark .text-white {
-  color: #111827 !important;
+  color: #f1f5f9 !important;
 }
 
 .dark .border-gray-100,
 .dark .border-gray-200 {
-  border-color: #374151 !important;
+  border-color: #334155 !important;
 }
 
-.dark button.bg-gray-800 {
-  background-color: #e5e7eb !important;
-  color: #111827 !important;
+.dark .border-t-gray-100 {
+  border-top-color: #334155 !important;
 }
 
+/* Кнопки в тёмной теме - более тёмные */
+.dark button.bg-gray-800:not(.bg-gray-900) {
+  background-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark button.bg-gray-800:hover:not(.bg-gray-900) {
+  background-color: #475569 !important;
+}
+
+/* Активная кнопка стиля (когда выбрана) */
+.dark button.bg-gray-800.shadow-md {
+  background-color: #475569 !important;
+  color: #f1f5f9 !important;
+}
+
+/* Главная кнопка "собрать образ" */
+.dark button.bg-gray-900 {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+.dark button.bg-gray-900:hover {
+  background-color: #334155 !important;
+}
+
+/* Неактивные кнопки (белые в светлой теме) */
 .dark button.bg-white {
-  background-color: #374151 !important;
-  color: #9ca3af !important;
-  border-color: #4b5563 !important;
+  background-color: #1e293b !important;
+  color: #94a3b8 !important;
+  border-color: #334155 !important;
 }
 
-.dark .bg-gray-800 {
-  background-color: #374151 !important;
+.dark button.bg-white:hover {
+  background-color: #334155 !important;
+  color: #e2e8f0 !important;
 }
 
-.dark .shadow-sm {
-  box-shadow: none !important;
+/* Pro тариф (который в светлой теме чёрный) */
+.dark .bg-gray-900.rounded-xl {
+  background-color: #f8fafc !important;
+}
+
+.dark .bg-gray-900.rounded-xl h3,
+.dark .bg-gray-900.rounded-xl p,
+.dark .bg-gray-900.rounded-xl li {
+  color: #0f172a !important;
+}
+
+/* Кнопка переключения темы */
+.dark .fixed.top-5.right-5 {
+  background-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .fixed.top-5.right-5:hover {
+  background-color: #475569 !important;
+}
+
+/* Превью фото */
+.dark .border-gray-100 {
+  border-color: #334155 !important;
+}
+
+.dark .bg-gray-100.rounded-full {
+  background-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+
+.dark .bg-gray-100.rounded-full:hover {
+  background-color: #475569 !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .shadow-sm,
+.dark .shadow-md,
+.dark .shadow-lg {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark img {
+  opacity: 0.9;
 }
