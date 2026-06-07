@@ -132,3 +132,46 @@
 .dark img {
   opacity: 0.9;
 }
+/* Кнопки тарифов в тёмной теме */
+.dark .flex-1.bg-white.rounded-xl.p-5 {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.dark .flex-1.bg-white.rounded-xl.p-5 h3,
+.dark .flex-1.bg-white.rounded-xl.p-5 p,
+.dark .flex-1.bg-white.rounded-xl.p-5 li {
+  color: #e2e8f0 !important;
+}
+
+.dark .flex-1.bg-white.rounded-xl.p-5 .text-gray-400 {
+  color: #94a3b8 !important;
+}
+
+.dark .flex-1.bg-white.rounded-xl.p-5 .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+/* Pro тариф (чёрный фон в светлой теме) */
+.dark .flex-1.bg-gray-900.rounded-xl.p-5 {
+  background-color: #f8fafc !important;
+}
+
+.dark .flex-1.bg-gray-900.rounded-xl.p-5 h3,
+.dark .flex-1.bg-gray-900.rounded-xl.p-5 p {
+  color: #0f172a !important;
+}
+
+.dark .flex-1.bg-gray-900.rounded-xl.p-5 .text-gray-300 {
+  color: #475569 !important;
+}
+
+.dark .flex-1.bg-gray-900.rounded-xl.p-5 .text-gray-400 {
+  color: #64748b !important;
+}
+
+.dark .absolute.-top-3 {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
