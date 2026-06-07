@@ -4,7 +4,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Тёмная тема */
+/* Тёмная тема - только если есть класс dark */
 .dark {
   color-scheme: dark;
+}
+.dark body {
+  background-color: #111827;
+}
+
+.dark .bg-gray-50 {
+  background-color: #1f2937;
+}
+
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-gray-700 {
+  color: #9ca3af;
+}
+
+.dark .text-gray-900 {
+  color: #f3f4f6;
+}
+
+.dark .border-gray-200 {
+  border-color: #374151;
+}
+
+.dark button:not(.bg-gray-800):not(.bg-gray-900) {
+  background-color: #1f2937;
+  color: #d1d5db;
+  border-color: #374151;
+}
+
+.dark button.bg-gray-800,
+.dark button.bg-gray-900 {
+  background-color: #f3f4f6;
+  color: #111827;
 }
