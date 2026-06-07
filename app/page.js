@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ThemeToggle from "./components/ThemeToggle";
 
 export default function Home() {
   const [images, setImages] = useState([]);
@@ -81,7 +82,8 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white dark:bg-gray-900">
+      <ThemeToggle />
       <div className="max-w-3xl mx-auto px-6 py-16">
         <div className="text-center mb-16">
           <div className="mb-4">
@@ -92,36 +94,36 @@ export default function Home() {
               onError={(e) => e.currentTarget.style.display = 'none'}
             />
           </div>
-          <p className="text-gray-500 text-lg font-light">
+          <p className="text-gray-500 dark:text-gray-400 text-lg font-light">
             твой стилист прямо в кармане
           </p>
         </div>
 
         {realWeather && realWeather.city && (
-          <div className="text-center mb-6 text-sm text-gray-500 bg-gray-50 py-2 rounded-full">
-            🌍 {realWeather.city} • {realWeather.description} • {realWeather.temp}°C
+          <div className="text-center mb-6 text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 py-2 rounded-full">
+            {realWeather.city} • {realWeather.description} • {realWeather.temp}°C
           </div>
         )}
 
-        <div className="bg-gray-50 rounded-2xl p-6 mb-8">
-          <h3 className="text-sm font-medium text-gray-700 mb-4 text-center">Настрой стиль</h3>
+        <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 mb-8">
+          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 text-center">Настрой стиль</h3>
           
           <div className="flex flex-wrap gap-2 justify-center mb-6">
             {[
-              { id: "casual", name: "casual", emoji: "👕" },
-              { id: "streetwear", name: "streetwear", emoji: "🧥" },
-              { id: "minimal", name: "минимализм", emoji: "⚪" },
-              { id: "oldmoney", name: "old money", emoji: "🕰️" },
-              { id: "office", name: "офис", emoji: "💼" },
-              { id: "evening", name: "вечерний", emoji: "✨" }
+              { id: "casual", name: "casual" },
+              { id: "streetwear", name: "streetwear" },
+              { id: "minimal", name: "минимализм" },
+              { id: "oldmoney", name: "old money" },
+              { id: "office", name: "офис" },
+              { id: "evening", name: "вечерний" }
             ].map((style) => (
               <button
                 key={style.id}
                 onClick={() => setSelectedStyle(style.id)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                   selectedStyle === style.id
-                    ? "bg-gray-800 text-white shadow-md"
-                    : "bg-white text-gray-600 border border-gray-200 hover:border-gray-300"
+                    ? "bg-gray-800 text-white dark:bg-white dark:text-gray-900 shadow-md"
+                    : "bg-white text-gray-600 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700"
                 }`}
               >
                 {style.name}
@@ -131,15 +133,14 @@ export default function Home() {
 
           {/* Кнопки погоды */}
           <div className="flex flex-wrap gap-2 justify-center mb-6">
-            <h4 className="w-full text-xs text-gray-500 text-center mb-2">Погода</h4>
+            <h4 className="w-full text-xs text-gray-500 dark:text-gray-400 text-center mb-2">Погода</h4>
             
-            {/* 👇 ЭТО НОВАЯ КНОПКА "АВТО" 👇 */}
             <button
               onClick={() => setSelectedWeather(null)}
               className={`px-3 py-1.5 rounded-full text-xs transition-all ${
                 selectedWeather === null
-                  ? "bg-gray-800 text-white"
-                  : "bg-white text-gray-600 border border-gray-200"
+                  ? "bg-gray-800 text-white dark:bg-white dark:text-gray-900"
+                  : "bg-white text-gray-600 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700"
               }`}
             >
               авто
@@ -156,8 +157,8 @@ export default function Home() {
                 onClick={() => setSelectedWeather(weather.id)}
                 className={`px-3 py-1.5 rounded-full text-xs transition-all ${
                   selectedWeather === weather.id
-                    ? "bg-gray-800 text-white"
-                    : "bg-white text-gray-600 border border-gray-200"
+                    ? "bg-gray-800 text-white dark:bg-white dark:text-gray-900"
+                    : "bg-white text-gray-600 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700"
                 }`}
               >
                 {weather.name}
@@ -166,7 +167,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-wrap gap-2 justify-center">
-            <h4 className="w-full text-xs text-gray-500 text-center mb-2">Событие</h4>
+            <h4 className="w-full text-xs text-gray-500 dark:text-gray-400 text-center mb-2">Событие</h4>
             {[
               { id: "daily", name: "повседневность" },
               { id: "date", name: "свидание" },
@@ -178,8 +179,8 @@ export default function Home() {
                 onClick={() => setSelectedEvent(event.id)}
                 className={`px-3 py-1.5 rounded-full text-xs transition-all ${
                   selectedEvent === event.id
-                    ? "bg-gray-800 text-white"
-                    : "bg-white text-gray-600 border border-gray-200"
+                    ? "bg-gray-800 text-white dark:bg-white dark:text-gray-900"
+                    : "bg-white text-gray-600 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700"
                 }`}
               >
                 {event.name}
@@ -188,33 +189,33 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 mb-12">
+        <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 mb-12">
           <div className="text-center mb-4">
-            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Тарифы</span>
+            <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Тарифы</span>
           </div>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <div className="flex-1 bg-white rounded-xl p-5 border border-gray-100">
-              <h3 className="font-medium text-gray-900 mb-1">Free</h3>
-              <p className="text-3xl font-light text-gray-900 mb-3">0 ₽<span className="text-sm text-gray-400">/мес</span></p>
-              <ul className="text-sm text-gray-500 space-y-1">
+            <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
+              <h3 className="font-medium text-gray-900 dark:text-white mb-1">Free</h3>
+              <p className="text-3xl font-light text-gray-900 dark:text-white mb-3">0 ₽<span className="text-sm text-gray-400 dark:text-gray-500">/мес</span></p>
+              <ul className="text-sm text-gray-500 dark:text-gray-400 space-y-1">
                 <li>✓ До 5 вещей</li>
                 <li>✓ Базовые стили</li>
               </ul>
             </div>
-            <div className="flex-1 bg-gray-900 rounded-xl p-5 relative">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-0.5 rounded-full border border-gray-700">популярный</div>
-              <h3 className="font-medium text-white mb-1">Pro</h3>
-              <p className="text-3xl font-light text-white mb-3">399 ₽<span className="text-sm text-gray-400">/мес</span></p>
-              <ul className="text-sm text-gray-300 space-y-1">
+            <div className="flex-1 bg-gray-900 dark:bg-white rounded-xl p-5 relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs px-3 py-0.5 rounded-full border border-gray-700 dark:border-gray-200">популярный</div>
+              <h3 className="font-medium text-white dark:text-gray-900 mb-1">Pro</h3>
+              <p className="text-3xl font-light text-white dark:text-gray-900 mb-3">399 ₽<span className="text-sm text-gray-400 dark:text-gray-500">/мес</span></p>
+              <ul className="text-sm text-gray-300 dark:text-gray-600 space-y-1">
                 <li>✓ Все стили</li>
                 <li>✓ AI стилист 24/7</li>
                 <li>✓ Рекомендации покупок</li>
               </ul>
             </div>
-            <div className="flex-1 bg-white rounded-xl p-5 border border-gray-100">
-              <h3 className="font-medium text-gray-900 mb-1">Premium</h3>
-              <p className="text-3xl font-light text-gray-900 mb-3">799 ₽<span className="text-sm text-gray-400">/мес</span></p>
-              <ul className="text-sm text-gray-500 space-y-1">
+            <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
+              <h3 className="font-medium text-gray-900 dark:text-white mb-1">Premium</h3>
+              <p className="text-3xl font-light text-gray-900 dark:text-white mb-3">799 ₽<span className="text-sm text-gray-400 dark:text-gray-500">/мес</span></p>
+              <ul className="text-sm text-gray-500 dark:text-gray-400 space-y-1">
                 <li>✓ Всё из Pro</li>
                 <li>✓ Виртуальная примерка</li>
                 <li>✓ Персональный стилист</li>
@@ -225,7 +226,7 @@ export default function Home() {
 
         <div className="mb-12">
           <label className="block mb-6">
-            <div className="border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center hover:border-gray-300 transition-colors cursor-pointer">
+            <div className="border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-2xl p-8 text-center hover:border-gray-300 dark:hover:border-gray-600 transition-colors cursor-pointer">
               <input
                 type="file"
                 multiple
@@ -237,10 +238,10 @@ export default function Home() {
               />
               <label htmlFor="file-input" className="cursor-pointer">
                 <span className="text-4xl block mb-3"></span>
-                <span className="text-gray-600 font-medium">
+                <span className="text-gray-600 dark:text-gray-400 font-medium">
                   {images.length >= 5 ? "максимум 5 вещей" : "добавить одежду"}
                 </span>
-                <p className="text-gray-400 text-sm mt-2">
+                <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">
                   {images.length}/5 вещей в гардеробе
                 </p>
               </label>
@@ -252,8 +253,8 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 {imagePreviews.map((preview, i) => (
                   <div key={i} className="relative group">
-                    <img src={preview} alt={`Одежда ${i+1}`} className="w-24 h-24 object-cover rounded-lg border border-gray-100 shadow-sm" />
-                    <button onClick={() => removePhoto(i)} className="absolute -top-2 -right-2 bg-gray-100 text-gray-500 rounded-full w-6 h-6 text-xs hover:bg-gray-200">✕</button>
+                    <img src={preview} alt={`Одежда ${i+1}`} className="w-24 h-24 object-cover rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm" />
+                    <button onClick={() => removePhoto(i)} className="absolute -top-2 -right-2 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-full w-6 h-6 text-xs hover:bg-gray-200 dark:hover:bg-gray-600">✕</button>
                   </div>
                 ))}
               </div>
@@ -265,17 +266,17 @@ export default function Home() {
           <button
             onClick={generateOutfit}
             disabled={loading || images.length === 0}
-            className="px-10 py-3 bg-gray-900 text-white rounded-full font-medium text-sm tracking-wide hover:bg-gray-800 transition-colors disabled:opacity-40"
+            className="px-10 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium text-sm tracking-wide hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors disabled:opacity-40"
           >
             {loading ? "создаю образ..." : "собрать образ"}
           </button>
         </div>
 
         {outfits && (
-          <div className="border-t border-gray-100 pt-12">
-            <h2 className="text-xl font-light text-gray-900 mb-6 tracking-tight">твой образ</h2>
-            <div className="bg-gray-50 rounded-2xl p-8">
-              <pre className="whitespace-pre-wrap font-sans text-gray-700 text-sm leading-relaxed">
+          <div className="border-t border-gray-100 dark:border-gray-800 pt-12">
+            <h2 className="text-xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">твой образ</h2>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
+              <pre className="whitespace-pre-wrap font-sans text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                 {outfits}
               </pre>
             </div>
